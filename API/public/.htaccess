@@ -1,0 +1,4 @@
+RewriteEngine On
+RewriteBase /LECBapps/empollon/API/public/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [QSA,L]
