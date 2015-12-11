@@ -1,0 +1,25 @@
+<script type="text/template" id="question-list-template">
+  <% _.each(_.shuffle(questions), function(question,i){ %>
+    <div class="pregunta panel panel-default unanswered<% if (i >= 10) { %> hidden<% }; %>" id="<%= question.get('id') %>">
+      <div class="enunciado panel-heading">
+
+      <%= question.get('text') %>
+      </div>
+      <ul class="list-group">
+      <% _.each(_.shuffle(question.get('answers')), function(answer){ %>
+        <a href="#" class=" respuesta list-group-item"
+        <% if (answer.correct == 1) { %>
+          data-correct="<%= 1 %>"
+
+        <% }; %>
+        ><%= answer.text %>
+        </a>
+      <% }); %>
+      </ul>
+    </div>
+  <% }); %>
+  <div class="panel panel-default btn-group">
+    <a id="morequestions" href="#" class="btn btn-default">Más preguntas</a>
+    <a id="redofailed" href="#" class="btn btn-default">Repetir falladas</a>
+  </div>
+</script>
