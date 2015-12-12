@@ -34,7 +34,7 @@ $app->get('/', function () use ($app) {
 $app->group('/nucleus', function () use ($app) {
 
     $app->get('/', function () use ($app) {
-      $nuclei = Nucleus::all();
+      $nuclei = Nucleus::valid()->get();
 
       $res = $app->response();
       $res['Content-Type'] = 'application/json';
@@ -51,7 +51,7 @@ $app->group('/nucleus', function () use ($app) {
 
     $app->get('/:id/sets', function ($id) use ($app) {
 
-      $sets = Nucleus::find($id)->sets;
+      $sets = Nucleus::find($id)->sets()->valid()->get();
 
       $res = $app->response();
       $res['Content-Type'] = 'application/json';
@@ -63,7 +63,7 @@ $app->group('/nucleus', function () use ($app) {
 $app->group('/set(s)', function () use ($app) {
 
     $app->get('/', function () use ($app) {
-      $sets = Set::all();
+      $sets = Set::valid()->get();
 
       $res = $app->response();
       $res['Content-Type'] = 'application/json';

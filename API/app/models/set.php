@@ -3,7 +3,7 @@
 class Set extends Illuminate\Database\Eloquent\Model {
 
   // MASS ASSIGNMENT -------------------------------------------------------
-  protected $fillable = array('name', 'nucleus_id', 'published');
+  protected $fillable = array('name', 'nucleus_id', 'published', 'is_valid');
   protected $hidden = array('created_at', 'updated_at');
 
   public function nucleus() {
@@ -13,4 +13,10 @@ class Set extends Illuminate\Database\Eloquent\Model {
   public function questions() {
     return $this->hasMany('Question');
   }
+
+	public function scopeValid($query) {
+//  		return $query->whereRaw('is_valid = 1');
+      return $query->whereIsValid('1');
+  	}
+
 }
