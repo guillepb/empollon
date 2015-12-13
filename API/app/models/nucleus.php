@@ -14,7 +14,7 @@ class Nucleus extends Illuminate\Database\Eloquent\Model {
 
 	public function scopeValid($query) {
 //		return $query->whereRaw('is_valid = 1');
-		return $query->whereIsValid('1');
+		return $query->whereIsValid('1');	
 	}
 
 }
