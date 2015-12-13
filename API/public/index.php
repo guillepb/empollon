@@ -42,7 +42,9 @@ $app->group('/nucleus', function () use ($app) {
     });
 
     $app->get('/:id', function ($id) use ($app) {
-      $nucleus = Nucleus::find($id);
+//      $nucleus = Nucleus::find($id);
+      $ids = explode(';',$id);
+      $nucleus = Nucleus::whereIn('id',$ids)->get();
 
       $res = $app->response();
       $res['Content-Type'] = 'application/json';
@@ -50,8 +52,8 @@ $app->group('/nucleus', function () use ($app) {
     });
 
     $app->get('/:id/sets', function ($id) use ($app) {
-
-      $sets = Nucleus::find($id)->sets()->valid()->get();
+      $ids = explode(';',$id);
+      $sets = Set::whereIn('nucleus_id',$ids)->valid()->get();
 
       $res = $app->response();
       $res['Content-Type'] = 'application/json';
@@ -71,7 +73,9 @@ $app->group('/set(s)', function () use ($app) {
     });
 
     $app->get('/:id', function ($id) use ($app) {
-      $set = Set::find($id);
+//      $set = Set::find($id);
+      $ids = explode(';',$id);
+      $set = Set::whereIn('id',$ids)->get();
 
       $res = $app->response();
       $res['Content-Type'] = 'application/json';
@@ -79,7 +83,8 @@ $app->group('/set(s)', function () use ($app) {
     });
 
     $app->get('/:id/questions', function ($id) use ($app) {
-      $questions = Set::find($id)->questions;
+      $ids = explode(';',$id);
+      $questions = Question::whereIn('set_id',$ids)->get();
       $questions->load('answers');
 
       $res = $app->response();
