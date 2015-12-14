@@ -9,12 +9,12 @@ class Nucleus extends Illuminate\Database\Eloquent\Model {
 	protected $table = 'nuclei';
 
 	public function sets() {
-		return $this->hasMany('Set');
+		return $this->belongsToMany('Set');
 	}
 
 	public function scopeValid($query) {
 //		return $query->whereRaw('is_valid = 1');
-		return $query->whereIsValid('1');	
+		return $query->whereIsValid('1');
 	}
 
 }

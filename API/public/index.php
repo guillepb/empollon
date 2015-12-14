@@ -53,7 +53,9 @@ $app->group('/nucleus', function () use ($app) {
 
     $app->get('/:id/sets', function ($id) use ($app) {
       $ids = explode(';',$id);
-      $sets = Set::whereIn('nucleus_id',$ids)->valid()->get();
+      $sets = Set::whereHas('nucleus',function($q) use ($ids) {
+        $q->whereIn('id',$ids);
+      })->valid()->get();
 
       $res = $app->response();
       $res['Content-Type'] = 'application/json';

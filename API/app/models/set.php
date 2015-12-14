@@ -3,11 +3,11 @@
 class Set extends Illuminate\Database\Eloquent\Model {
 
   // MASS ASSIGNMENT -------------------------------------------------------
-  protected $fillable = array('name', 'nucleus_id', 'published', 'is_valid');
+  protected $fillable = array('name', 'published', 'is_valid');
   protected $hidden = array('created_at', 'updated_at');
 
   public function nucleus() {
-		return $this->belongsTo('Nucleus');
+		return $this->belongsToMany('Nucleus');
 	}
 
   public function questions() {
