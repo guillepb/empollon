@@ -34,9 +34,13 @@ $app->get('/', function () use ($app) {
 $app->group('/nucleus', function () use ($app) {
 
     $app->get('/', function () use ($app) {
+<<<<<<< HEAD
       $nuclei = Nucleus::valid()->with(['sets' => function($q){
           $q->where('is_valid','=','1');
         }])->get();
+=======
+      $nuclei = Nucleus::valid()->with('sets')->get();
+>>>>>>> f238d7ef1f8055163826758e5386d247fd79dddf
 
       $res = $app->response();
       $res['Content-Type'] = 'application/json';
