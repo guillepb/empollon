@@ -34,7 +34,7 @@ $app->get('/', function () use ($app) {
 $app->group('/nucleus', function () use ($app) {
 
     $app->get('/', function () use ($app) {
-      $nuclei = Nucleus::valid()->get();
+      $nuclei = Nucleus::valid()->with('sets')->get();
 
       $res = $app->response();
       $res['Content-Type'] = 'application/json';
@@ -44,7 +44,9 @@ $app->group('/nucleus', function () use ($app) {
     $app->get('/:id', function ($id) use ($app) {
 //      $nucleus = Nucleus::find($id);
       $ids = explode(';',$id);
-      $nucleus = Nucleus::whereIn('id',$ids)->get();
+      $nucleus = Nucleus::whereIn('id',$ids)->with(['sets' => function($q){
+          $q->where('is_valid','=','1');
+        }])->get();
 
       $res = $app->response();
       $res['Content-Type'] = 'application/json';
